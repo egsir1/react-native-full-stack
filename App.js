@@ -1,7 +1,10 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-
+import { StyleSheet } from "react-native";
 import { LogBox } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import BottomTabNavigation from "./navigation/BottomTabNavigation";
+
+const Stack = createNativeStackNavigator();
 
 // Ignore specific warning messages
 LogBox.ignoreLogs([
@@ -11,10 +14,15 @@ LogBox.ignoreLogs([
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Bottom Navigation"
+          component={BottomTabNavigation}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -24,5 +32,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  textStyle: {
+    fontWeight: "900",
+    fontSize: 16,
   },
 });
